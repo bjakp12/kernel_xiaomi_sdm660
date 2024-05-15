@@ -983,6 +983,15 @@ static int fg_get_batt_profile(struct fg_dev *fg)
 		fg->bp.vbatt_full_mv = -EINVAL;
 	}
 
+#ifdef CONFIG_MACH_MI
+	rc = of_property_read_u32(profile_node, "qcom,nom-batt-capacity-mah",
+                       &fg->bp.nom_cap_uah);
+	if (rc < 0) {
+               pr_err("battery nominal capacity unavailable, rc:%d\n", rc);
+               fg->bp.nom_cap_uah = -EINVAL;
+       }
+#endif
+
 #ifdef CONFIG_MACH_XIAOMI_CLOVER
 	rc = of_property_read_u32(profile_node, "qcom,nom-batt-capacity-mah",
 			&fg->bp.batt_capacity_mah);
@@ -990,20 +999,6 @@ static int fg_get_batt_profile(struct fg_dev *fg)
 		pr_err("battery capacity mah unavailable, rc:%d\n", rc);
 		fg->bp.batt_capacity_mah = -EINVAL;
 	}
-#elif defined(CONFIG_MACH_MI)
-	rc = of_property_read_u32(profile_node, "qcom,nom-batt-capacity-mah",
-                       &fg->bp.nom_cap_uah);
-	if (rc < 0) {
-               pr_err("battery nominal capacity unavailable, rc:%d\n", rc);
-               fg->bp.nom_cap_uah = -EINVAL;
-       }
-#else
-        rc = of_property_read_u32(profile_node, "qcom,fg-cc-cv-threshold-mv",
-                        &fg->bp.vbatt_full_mv);
-        if (rc < 0) {
-                pr_err("battery cc_cv threshold unavailable, rc:%d\n", rc);
-                fg->bp.vbatt_full_mv = -EINVAL;
-        }
 #endif
 
 	data = of_get_property(profile_node, "qcom,fg-profile-data", &len);
@@ -4012,11 +4007,13 @@ static int fg_psy_get_property(struct power_supply *psy,
 		rc = fg_get_sram_prop(fg, FG_SRAM_OCV, &pval->intval);
 		break;
 	case POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN:
+#ifdef CONFIG_MACH_MI
+		if (-EINVAL != fg->bp.nom_cap_uah)
+			pval->intval = fg->bp.nom_cap_uah * 1000;
+		else
+#endif
 #ifdef CONFIG_MACH_XIAOMI_CLOVER
 		pval->intval = fg->bp.batt_capacity_mah;
-#elif defined(CONFIG_MACH_MI)
-		pval->intval = fg->bp.nom_cap_uah * 1000;
-#else
 		pval->intval = chip->cl.nom_cap_uah;
 #endif
 		break;
