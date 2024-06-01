@@ -250,15 +250,13 @@ static ssize_t double_tap_store(struct kobject *kobj,
 				struct kobj_attribute *attr, const char *buf,
 				size_t count)
 {
-	int rc, val, enable;
+	int rc, val;
 
 	rc = kstrtoint(buf, 10, &val);
 	if (rc)
 		return -EINVAL;
 
-	enable = !!val;
-	fts_gesture_enable(enable);
-	fts_data->lpwg_mode = enable;
+	fts_gesture_data.mode = !!val;
 	return count;
 }
 

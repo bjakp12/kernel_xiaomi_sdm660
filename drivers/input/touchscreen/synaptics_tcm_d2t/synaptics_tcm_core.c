@@ -38,10 +38,10 @@
 #include "synaptics_tcm_core.h"
 #include <linux/uaccess.h>
 #include <linux/debugfs.h>
+#include <uapi/linux/sched/types.h>
 #ifdef CONFIG_TOUCHSCREEN_COMMON
 #include <linux/input/tp_common.h>
 #endif
-#include <uapi/linux/sched/types.h>
 /*#define RESET_ON_RESUME*/
 #define RESET_ON_RESUME_DELAY_MS 20
 
