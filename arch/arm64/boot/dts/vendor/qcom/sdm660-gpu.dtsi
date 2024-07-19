@@ -97,7 +97,8 @@
 				<26 512 0 5412000>,    /* 11 bus=1353 */
 				<26 512 0 6220000>,    /* 12 bus=1555 */
 				<26 512 0 7216000>;    /* 13 bus=1804 */
-				<26 512 0 8256000>;    /* 14 bus=2150 */
+                                <26 512 0 8500000>;    /* 14 */
+                                <26 512 0 10040000>;   /* 15 */
 
 		/* GDSC regulator names */
 		regulator-names = "vddcx", "vdd";
@@ -155,11 +156,6 @@
 				qcom,mempool-page-size  = <65536>;
 				qcom,mempool-allocate;
 			};
-			/* 1M Page Pool configuration */
-			qcom,gpu-mempool@2 {
-				reg = <2>;
-				qcom,mempool-page-size = <1048576>;
-			};
 		};
 
 		/*
@@ -188,7 +184,7 @@
 					qcom,gpu-freq = <1004000000>;
 					qcom,bus-freq = <13>;
 					qcom,bus-min = <13>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* TURBO */
@@ -197,7 +193,7 @@
 					qcom,gpu-freq = <950000000>;
 					qcom,bus-freq = <11>;
 					qcom,bus-min = <11>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* TURBO */
@@ -206,7 +202,7 @@
 					qcom,gpu-freq = <814000000>;
 					qcom,bus-freq = <11>;
 					qcom,bus-min = <11>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* NOM_L1 */
@@ -287,7 +283,7 @@
 					qcom,gpu-freq = <1004000000>;
 					qcom,bus-freq = <13>;
 					qcom,bus-min = <13>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* TURBO */
@@ -296,7 +292,7 @@
 					qcom,gpu-freq = <950000000>;
 					qcom,bus-freq = <11>;
 					qcom,bus-min = <11>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* TURBO */
@@ -305,7 +301,7 @@
 					qcom,gpu-freq = <814000000>;
 					qcom,bus-freq = <11>;
 					qcom,bus-min = <11>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* NOM_L1 */
@@ -386,7 +382,7 @@
 					qcom,gpu-freq = <1004000000>;
 					qcom,bus-freq = <13>;
 					qcom,bus-min = <13>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* TURBO */
@@ -395,7 +391,7 @@
 					qcom,gpu-freq = <950000000>;
 					qcom,bus-freq = <11>;
 					qcom,bus-min = <11>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* TURBO */
@@ -404,7 +400,7 @@
 					qcom,gpu-freq = <814000000>;
 					qcom,bus-freq = <11>;
 					qcom,bus-min = <11>;
-					qcom,bus-max = <14>;
+					qcom,bus-max = <15>;
 				};
 
 				/* NOM_L1 */
